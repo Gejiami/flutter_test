@@ -62,9 +62,6 @@ switch (selectedIndex) {
   case 1:
     page = FavoritesPage();
     break;
-  case 2:
-    page = LastGeneratedNamesPage();
-    break;
   default:
     throw UnimplementedError('no widget for $selectedIndex');
 }
@@ -84,10 +81,6 @@ switch (selectedIndex) {
                     NavigationRailDestination(
                       icon: Icon(Icons.favorite),
                       label: Text('Favorites'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.favorite),
-                      label: Text('LastGenerated'),
                     ),
                   ],
                   selectedIndex: selectedIndex, 
@@ -212,26 +205,3 @@ class FavoritesPage extends StatelessWidget {
     );
   }
 } 
-
-class LastGeneratedNamesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (var i = appState.favorites.length - 1; i >= 0; i--)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Text(appState.favorites[i].asPascalCase),
-            ),
-        ],
-      ),
-    );
-  }
-} 
-
-
-
